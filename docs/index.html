@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unit Matchup Table</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
   </head>
   <body>
     <h1>Mechabellum Matchup Table</h1>
@@ -17,8 +18,14 @@
         <input type="number" id="attackLevel" name="attackLevel" value="1" step="1" min="1" max="9">
         <label for="attackIncrease">% Increased ATK</label>
         <input type="number" id="attackIncrease" name="attackIncrease" value="0" min="0" step="1">
+        <div class="tooltip">?
+          <span class="tooltiptext">"increased ATK" mods are applied additively. Input the sum of every buff to apply.</span>
+        </div>
         <label for="attackDecreases">% Decreased ATK</label>
         <input type="text" id="attackDecreases" name="attackDecreases" pattern="^\d+(?:\s*,\s*\d+)*$" placeholder="11,10">
+        <div class="tooltip">?
+          <span class="tooltiptext">"decreased ATK" mods are applied multiplicatively. Input a list of every debuff to apply, separated by ",".</span>
+        </div>
       </fieldset>
       <fieldset>
         <legend>Defense modifiers</legend>
@@ -26,6 +33,9 @@
         <input type="number" id="defenseLevel" name="defenseLevel" value="1" step="1" min="1" max="9">
         <label for="defenseIncrease">% Increased HP</label>
         <input type="number" id="defenseIncrease" name="defenseIncrease" value="0" step="1">
+        <div class="tooltip">?
+          <span class="tooltiptext">"increased HP" mods are applied additively. Input the sum of every buff to apply.</span>
+        </div>
         <label for="defenseDecreases">% Decreased HP</label>
         <input type="text" id="defenseDecreases" name="defenseDecreases" pattern="^\d+(?:\s*,\s*\d+)*$" placeholder="11,10">
         <div class="tooltip">?
