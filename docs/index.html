@@ -4,105 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unit Matchup Table</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        margin: 20px;
-        background-color: #1a1a1a;
-        color: #e0e0e0;
-      }
-      .table-container {
-        overflow-x: auto;
-        margin-top: 20px;
-        position: relative;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th,
-      td {
-        border: 1px solid #333;
-        padding: 8px;
-        text-align: center;
-        font-size: 12px;
-        color: #1a1a1a;
-      }
-      th:first-child,
-      td:first-child {
-        position: sticky;
-        left: 0;
-        background-color: #1a1a1a;
-        z-index: 1;
-      }
-      .cell-1 {
-        background-color: #56B4E9;
-      }
-      .cell-2 {
-        background-color: #009E73;
-      }
-      .cell-3 {
-        background-color: #F0E442;
-      }
-      .cell-4 {
-        background-color: #D55E00;
-      }
-      .cell-5 {
-        background-color: #CC79A7;
-      }
-      .hits {
-        /* background-clip: content-box; */
-        font-weight: bold;
-      }
-      .unit-name {
-        font-weight: bold;
-        white-space: nowrap;
-        color: #e0e0e0;
-      }
-      .level-form {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 20px;
-        padding: 20px;
-        background-color: #2d2d2d;
-        border-radius: 8px;
-
-        fieldset {
-          flex: 1;
-          background-color: #1a1a1a;
-
-          legend {
-            font-weight: bold;
-          }
-
-          label {
-            display: block;
-            margin-bottom: 5px;
-            margin-top: 5px;
-            color: #e0e0e0;
-          }
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <h1>Mechabellum Matchup Table</h1>
-    <p>Number of hits required to kill each unit (HP / Min Attack)</p>
+    <p>Number of hits required to kill each unit (HP / Max Attack)</p>
 
     <form id="levelForm" class="level-form">
       <fieldset>
         <legend>Attack modifiers</legend>
         <label for="attackLevel">Level</label>
         <input type="number" id="attackLevel" name="attackLevel" value="1" step="1" min="1" max="9">
-        <label for="attackPercent">% Increased ATK</label>
-        <input type="number" id="attackPercent" name="attackPercent" value="0" step="1">
+        <label for="attackIncrease">% Increased ATK</label>
+        <input type="number" id="attackIncrease" name="attackIncrease" value="0" min="0" step="1">
+        <label for="attackDecreases">% Decreased ATK</label>
+        <input type="text" id="attackDecreases" name="attackDecreases" pattern="^\d+(?:\s*,\s*\d+)*$" placeholder="11,10">
       </fieldset>
       <fieldset>
         <legend>Defense modifiers</legend>
         <label for="defenseLevel">Level</label>
         <input type="number" id="defenseLevel" name="defenseLevel" value="1" step="1" min="1" max="9">
-        <label for="defensePercent">% Increased HP</label>
-        <input type="number" id="defensePercent" name="defensePercent" value="0" step="1">
+        <label for="defenseIncrease">% Increased HP</label>
+        <input type="number" id="defenseIncrease" name="defenseIncrease" value="0" step="1">
+        <label for="defenseDecreases">% Decreased HP</label>
+        <input type="text" id="defenseDecreases" name="defenseDecreases" pattern="^\d+(?:\s*,\s*\d+)*$" placeholder="11,10">
+        <div class="tooltip">?
+          <span class="tooltiptext">"decreased HP" mods are applied multiplicatively. Input a list of every debuff to apply, separated by ",".</span>
+        </div>
+        <!--fieldset>
+          <legend>Debuffs</legend>
+          <input type="checkbox" id="acid" name="acid" >
+          <label for="acid">Acid</label>
+        </fieldset-->
+        
       </fieldset>
     </form>
 
@@ -115,91 +49,6 @@
       </table>
     </div>
 
-    <script type="module">
-      import { units } from './data/units.js';
-
-      let defenseConfig = {
-        level: 1,
-        percentIncrease: 0
-      }
-
-      let attackConfig = {
-        level: 1,
-        percentIncrease: 0
-      }
-
-      function calculateTotalHp(defender) {
-        const baseHp = defender.hp * defenseConfig.level;
-        return baseHp * (1 + defenseConfig.percentIncrease / 100);
-      }
-
-      function calculateTotalAttack(attacker) {
-        const baseAttack = attacker.maxAttack * attackConfig.level;
-        return baseAttack * (1 + attackConfig.percentIncrease / 100);
-      }
-
-      function calculateHits(attacker, defender) {
-        if (attacker.maxAttack <= 0) return Infinity;
-        const totalHp = calculateTotalHp(defender);
-        const totalAttack = calculateTotalAttack(attacker);
-        return totalHp / totalAttack;
-      }
-
-      function getColorClass(hits) {
-        if (hits <= 1) return 'cell-1';
-        if (hits <= 2) return 'cell-2';
-        if (hits <= 5) return 'cell-3';
-        if (hits <= 10) return 'cell-4';
-        return 'cell-5';
-      }
-
-      function createMatchupTable() {
-        const headerRow = document.getElementById('headerRow');
-        const tableBody = document.getElementById('tableBody');
-        const unitList = Object.values(units);
-
-        // Clear existing table
-        headerRow.innerHTML = '';
-        tableBody.innerHTML = '';
-
-        // Create header row
-        headerRow.innerHTML =
-          '<th></th>' +
-          unitList
-            .map((defender) => `<th class="unit-name">${defender.name}<br/>${Math.round(calculateTotalHp(defender))} HP</th>`)
-            .join('');
-
-        // Create table body
-        unitList.forEach((attacker) => {
-          const row = document.createElement('tr');
-          row.innerHTML =
-            `<td class="unit-name">${attacker.name} - ${Math.round(calculateTotalAttack(attacker))} DMG</td>` +
-            unitList
-              .map((defender) => {
-                const hits = calculateHits(attacker, defender);
-                const colorClass = getColorClass(hits);
-                return `<td class="hits ${colorClass}">${
-                  hits === Infinity ? '∞' : hits.toFixed(2)
-                }</td>`;
-              })
-              .join('');
-          tableBody.appendChild(row);
-        });
-      }
-
-      // Initial table creation
-      createMatchupTable();
-
-      // Handle form changes
-      const form = document.getElementById('levelForm');
-      form.addEventListener('change', (e) => {
-        const formData = new FormData(form);
-        attackConfig.level = parseInt(formData.get('attackLevel'));
-        defenseConfig.level = parseInt(formData.get('defenseLevel'));
-        attackConfig.percentIncrease = parseInt(formData.get('attackPercent')) || 0;
-        defenseConfig.percentIncrease = parseInt(formData.get('defensePercent')) || 0;
-        createMatchupTable();
-      });
-    </script>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>

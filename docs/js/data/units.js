@@ -1,6 +1,5 @@
-// This file is auto-generated from units.csv
-export const units =  {
-  "Crawler": {
+export const units =  [
+  {
     "name": "Crawler",
     "air": false,
     "giant": false,
@@ -18,7 +17,7 @@ export const units =  {
     "range": "Melee",
     "speed": 16
   },
-  "Fang": {
+  {
     "name": "Fang",
     "air": false,
     "giant": false,
@@ -36,7 +35,7 @@ export const units =  {
     "range": 75,
     "speed": 6
   },
-  "Hound": {
+  {
     "name": "Hound",
     "air": false,
     "giant": false,
@@ -54,7 +53,25 @@ export const units =  {
     "range": 70,
     "speed": 10
   },
-  "Arclight": {
+  {
+    "name": "Void Eye",
+    "air": false,
+    "giant": false,
+    "rare": false,
+    "cost": 100,
+    "unlockCost": 0,
+    "units": 3,
+    "hp": 844,
+    "minAttack": 1412,
+    "maxAttack": 1412,
+    "projectiles": null,
+    "targetsAir": false,
+    "attackInterval": 3.5,
+    "damageArea": 0,
+    "range": 90,
+    "speed": 8
+  },
+  {
     "name": "Arclight",
     "air": false,
     "giant": false,
@@ -72,7 +89,7 @@ export const units =  {
     "range": 93,
     "speed": 7
   },
-  "Marksman": {
+  {
     "name": "Marksman",
     "air": false,
     "giant": false,
@@ -90,7 +107,7 @@ export const units =  {
     "range": 140,
     "speed": 8
   },
-  "Mustang": {
+  {
     "name": "Mustang",
     "air": false,
     "giant": false,
@@ -108,7 +125,7 @@ export const units =  {
     "range": 95,
     "speed": 16
   },
-  "Sledgehammer": {
+  {
     "name": "Sledgehammer",
     "air": false,
     "giant": false,
@@ -126,7 +143,7 @@ export const units =  {
     "range": 95,
     "speed": 7
   },
-  "Stormcaller": {
+  {
     "name": "Stormcaller",
     "air": false,
     "giant": false,
@@ -139,12 +156,12 @@ export const units =  {
     "maxAttack": 796,
     "projectiles": 4,
     "targetsAir": false,
-    "attackInterval": 6.3,
+    "attackInterval": 6.6,
     "damageArea": 5.5,
     "range": 180,
     "speed": 6
   },
-  "Steel Ball": {
+  {
     "name": "Steel Ball",
     "air": false,
     "giant": false,
@@ -162,7 +179,7 @@ export const units =  {
     "range": 45,
     "speed": 16
   },
-  "Tarantula": {
+  {
     "name": "Tarantula",
     "air": false,
     "giant": false,
@@ -180,7 +197,25 @@ export const units =  {
     "range": 80,
     "speed": 8
   },
-  "Rhino": {
+  {
+    "name": "Sabertooth",
+    "air": false,
+    "giant": false,
+    "rare": false,
+    "cost": 200,
+    "unlockCost": 0,
+    "units": 1,
+    "hp": 15541,
+    "minAttack": 7858,
+    "maxAttack": 7858,
+    "projectiles": null,
+    "targetsAir": false,
+    "attackInterval": 3.4,
+    "damageArea": 5,
+    "range": 95,
+    "speed": 8
+  },
+  {
     "name": "Rhino",
     "air": false,
     "giant": false,
@@ -198,7 +233,7 @@ export const units =  {
     "range": "Melee",
     "speed": 16
   },
-  "Hacker": {
+  {
     "name": "Hacker",
     "air": false,
     "giant": false,
@@ -216,7 +251,7 @@ export const units =  {
     "range": 110,
     "speed": 8
   },
-  "Wasp": {
+  {
     "name": "Wasp",
     "air": true,
     "giant": false,
@@ -234,7 +269,7 @@ export const units =  {
     "range": 50,
     "speed": 16
   },
-  "Phoenix": {
+  {
     "name": "Phoenix",
     "air": true,
     "giant": false,
@@ -252,7 +287,7 @@ export const units =  {
     "range": 120,
     "speed": 16
   },
-  "Phantom Ray": {
+  {
     "name": "Phantom Ray",
     "air": true,
     "giant": false,
@@ -270,7 +305,7 @@ export const units =  {
     "range": 65,
     "speed": 16
   },
-  "Wraith": {
+  {
     "name": "Wraith",
     "air": true,
     "giant": false,
@@ -281,14 +316,14 @@ export const units =  {
     "hp": 15001,
     "minAttack": 405,
     "maxAttack": 405,
-    "projectiles": null,
+    "projectiles": 4,
     "targetsAir": true,
     "attackInterval": 1.6,
     "damageArea": 8,
-    "range": 55,
-    "speed": 12
+    "range": 60,
+    "speed": 10
   },
-  "Scorpion": {
+  {
     "name": "Scorpion",
     "air": false,
     "giant": false,
@@ -306,7 +341,7 @@ export const units =  {
     "range": 100,
     "speed": 7
   },
-  "Vulcan": {
+  {
     "name": "Vulcan",
     "air": false,
     "giant": true,
@@ -324,7 +359,7 @@ export const units =  {
     "range": 95,
     "speed": 6
   },
-  "Melting Point": {
+  {
     "name": "Melting Point",
     "air": false,
     "giant": true,
@@ -342,7 +377,7 @@ export const units =  {
     "range": 115,
     "speed": 6
   },
-  "Fortress": {
+  {
     "name": "Fortress",
     "air": false,
     "giant": true,
@@ -360,7 +395,7 @@ export const units =  {
     "range": 100,
     "speed": 6
   },
-  "Sandworm": {
+  {
     "name": "Sandworm",
     "air": false,
     "giant": true,
@@ -378,7 +413,7 @@ export const units =  {
     "range": "Melee",
     "speed": 16
   },
-  "Raiden": {
+  {
     "name": "Raiden",
     "air": true,
     "giant": true,
@@ -391,12 +426,12 @@ export const units =  {
     "maxAttack": 5304,
     "projectiles": null,
     "targetsAir": true,
-    "attackInterval": 4.2,
+    "attackInterval": 4.6,
     "damageArea": 0,
     "range": 110,
     "speed": 10
   },
-  "Overlord": {
+  {
     "name": "Overlord",
     "air": true,
     "giant": true,
@@ -414,7 +449,7 @@ export const units =  {
     "range": 120,
     "speed": 10
   },
-  "War Factory": {
+  {
     "name": "War Factory",
     "air": false,
     "giant": true,
@@ -432,7 +467,25 @@ export const units =  {
     "range": 100,
     "speed": 6
   },
-  "Fire Badger": {
+  {
+    "name": "Abyss",
+    "air": true,
+    "giant": true,
+    "rare": false,
+    "cost": 800,
+    "unlockCost": 200,
+    "units": 1,
+    "hp": 78310,
+    "minAttack": 3859,
+    "maxAttack": 3859,
+    "projectiles": null,
+    "targetsAir": true,
+    "attackInterval": 4,
+    "damageArea": 10,
+    "range": 100,
+    "speed": 10
+  },
+  {
     "name": "Fire Badger",
     "air": false,
     "giant": false,
@@ -450,25 +503,7 @@ export const units =  {
     "range": 60,
     "speed": 10
   },
-  "Sabertooth": {
-    "name": "Sabertooth",
-    "air": false,
-    "giant": false,
-    "rare": false,
-    "cost": 200,
-    "unlockCost": 0,
-    "units": 1,
-    "hp": 14801,
-    "minAttack": 8360,
-    "maxAttack": 8360,
-    "projectiles": null,
-    "targetsAir": false,
-    "attackInterval": 3.6,
-    "damageArea": 5,
-    "range": 95,
-    "speed": 8
-  },
-  "Typhoon": {
+  {
     "name": "Typhoon",
     "air": false,
     "giant": false,
@@ -486,7 +521,7 @@ export const units =  {
     "range": 100,
     "speed": 9
   },
-  "Farseer": {
+  {
     "name": "Farseer",
     "air": false,
     "giant": false,
@@ -497,14 +532,14 @@ export const units =  {
     "hp": 11991,
     "minAttack": 1114,
     "maxAttack": 1114,
-    "projectiles": null,
+    "projectiles": 2,
     "targetsAir": true,
     "attackInterval": 1.6,
     "damageArea": 8,
     "range": 125,
     "speed": 16
   },
-  "Larva": {
+  {
     "name": "Larva",
     "air": false,
     "giant": false,
@@ -522,7 +557,7 @@ export const units =  {
     "range": "Melee",
     "speed": 16
   },
-  "Spider Mine": {
+  {
     "name": "Spider Mine",
     "air": false,
     "giant": false,
@@ -540,4 +575,4 @@ export const units =  {
     "range": "Melee",
     "speed": 21
   }
-};
+];

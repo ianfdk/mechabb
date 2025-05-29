@@ -1,4 +1,4 @@
 .PHONY: serve
 
 serve:
-	python3 -m http.server 8000
+	cd docs/ && python3 -m http.server 8000
