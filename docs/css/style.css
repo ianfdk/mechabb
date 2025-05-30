@@ -28,6 +28,9 @@ td:first-child {
   background-color: #1a1a1a;
   z-index: 1;
 }
+.cell-0 {
+  background-color: #1a1a1a;
+}
 .cell-1 {
   background-color: #56B4E9;
 }

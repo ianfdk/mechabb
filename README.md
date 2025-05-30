@@ -16,7 +16,6 @@ Please submit bug reports in the form of Github issues.
 If a feature you have in mind is not in the Roadmap below, feel free to submit a Github issue (or 👍 existing issues).
 
 ## Roadmap (in no particular order)
-- Consider Ground/Air
 - Display "seconds to kill" instead of "hits to kill"
 - Amount of units attacking
 - Skills

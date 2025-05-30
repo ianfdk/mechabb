@@ -56,6 +56,7 @@ function calculateTotalAttack(attacker) {
 }
 
 function calculateHits(attacker, defender) {
+  if (!attacker.targetsAir && defender.air) return -1;
   if (attacker.maxAttack <= 0) return Infinity;
   const totalHp = calculateTotalHp(defender);
   const totalAttack = calculateTotalAttack(attacker);
@@ -63,6 +64,7 @@ function calculateHits(attacker, defender) {
 }
 
 function getColorClass(hits) {
+  if (hits <= 0) return 'cell-0';
   if (hits <= 1) return 'cell-1';
   if (hits <= 2) return 'cell-2';
   if (hits <= 5) return 'cell-3';
