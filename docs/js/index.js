@@ -79,12 +79,19 @@ function renderHeaderCell(unit) {
   </th>`;
 }
 
+function formatCellText(nbHits) {
+  if (nbHits === Infinity) return '∞';
+  if (nbHits === -1) return '';
+  return nbHits.toFixed(2);
+}
+
 function renderBodyCell(rowUnit, colUnit) {
   const nbHits = calculateHits(rowUnit, colUnit);
   const colorClass = getColorClass(nbHits);
+  const cellText = formatCellText(nbHits);
   return `
     <td class="hits ${colorClass}">
-      ${ nbHits === Infinity ? '∞' : nbHits.toFixed(2) }
+      ${ cellText }
     </td>`;
 }
 
