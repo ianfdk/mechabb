@@ -1,5 +1,8 @@
 import { units } from './data/units.js';
 
+const HITS_TO_KILL = 'htk';
+const TIME_TO_KILL = 'ttk';
+
 let config = {
   attack: {
     level: 1,
@@ -10,6 +13,9 @@ let config = {
     level: 1,
     increase: 0,
     decreases: [],
+  },
+  display: {
+    displayAs: HITS_TO_KILL,
   },
 }
 
@@ -27,6 +33,8 @@ function updateConfig(form) {
   config.defense.decreases = (formData.get('defenseDecreases') || "0").split(',').map(
     (n) => parseInt(n)
   );
+
+  config.display.displayAs = formData.get('displayAs');
 }
 
 function calculateTotalHp(defender) {
@@ -52,15 +60,23 @@ function calculateTotalAttack(attacker) {
   }
   // Apply increase
   const increasedAttack = decreasedAttack * (1 + config.attack.increase / 100);
-  return increasedAttack;
+  return Math.floor(increasedAttack);
 }
 
-function calculateHits(attacker, defender) {
+function calculateDps(unit) {
+  return Math.round(calculateTotalAttack(unit) * (1 / unit.attackInterval));
+}
+
+function calculateHitsToKill(attacker, defender) {
   if (!attacker.targetsAir && defender.air) return -1;
   if (attacker.maxAttack <= 0) return Infinity;
   const totalHp = calculateTotalHp(defender);
   const totalAttack = calculateTotalAttack(attacker);
   return totalHp / totalAttack;
+}
+
+function calculateTimeToKill(attacker, defender) {
+  return Math.ceil(calculateHitsToKill(attacker, defender)) * attacker.attackInterval;
 }
 
 function getColorClass(hits) {
@@ -79,16 +95,21 @@ function renderHeaderCell(unit) {
   </th>`;
 }
 
-function formatCellText(nbHits) {
-  if (nbHits === Infinity) return '∞';
-  if (nbHits === -1) return '';
-  return nbHits.toFixed(2);
+function formatCellText(atkValue) {
+  if (isNaN(atkValue)) return 'N/A';
+  if (atkValue === Infinity) return '∞';
+  if (atkValue === -1) return '';
+  let atkValueFixed = atkValue.toFixed(2);
+  if (config.display.displayAs === TIME_TO_KILL) atkValueFixed += 's'
+  return atkValueFixed;
 }
 
 function renderBodyCell(rowUnit, colUnit) {
-  const nbHits = calculateHits(rowUnit, colUnit);
-  const colorClass = getColorClass(nbHits);
-  const cellText = formatCellText(nbHits);
+  const cellValue = config.display.displayAs === HITS_TO_KILL 
+    ? calculateHitsToKill(rowUnit, colUnit)
+    : calculateTimeToKill(rowUnit, colUnit)
+  const colorClass = getColorClass(cellValue);
+  const cellText = formatCellText(cellValue);
   return `
     <td class="hits ${colorClass}">
       ${ cellText }
@@ -96,9 +117,18 @@ function renderBodyCell(rowUnit, colUnit) {
 }
 
 function renderBodyRow(rowUnit) {
+  let atkValue = '';
+  if (config.display.displayAs === HITS_TO_KILL) {
+    atkValue = `${calculateTotalAttack(rowUnit)} DMG`;
+  } else if (config.display.displayAs === TIME_TO_KILL) {
+    if (rowUnit.attackInterval === null) {
+      return '';
+    }
+    atkValue = `${calculateDps(rowUnit)} DPS`;
+  }
   return `
     <tr>
-      <td class="unit-name">${rowUnit.name} - ${Math.floor(calculateTotalAttack(rowUnit))} DMG</td>
+      <td class="unit-name">${rowUnit.name} - ${atkValue}</td>
       ${ units.map(colUnit => renderBodyCell(rowUnit, colUnit)).join('') }
     </tr>`;
 }

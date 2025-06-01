@@ -9,7 +9,6 @@
   </head>
   <body>
     <h1>Mechabellum Matchup Table</h1>
-    <h2>Number of hits required to kill each unit (HP / Max Attack)</h2>
     <p>Patch 1.5.1</p>
 
     <form id="levelForm" class="level-form">
@@ -49,8 +48,17 @@
         </fieldset-->
         
       </fieldset>
+      <fieldset>
+        <legend>Display options</legend>
+        <label for="displayAs">Display as:</label>
+        <select name="displayAs" id="displayAs">
+          <option value="htk">Hits to kill</option>
+          <option value="ttk">Time to kill</option>
+        </select>
+      </fieldset>
     </form>
 
+    <h2>Number of hits required to kill each unit (HP / Max Attack)</h2>
     <div class="table-container">
       <table id="matchupTable">
         <thead>

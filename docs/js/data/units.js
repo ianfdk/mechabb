@@ -570,7 +570,7 @@ export const units =  [
     "maxAttack": 4500,
     "projectiles": null,
     "targetsAir": true,
-    "attackInterval": "N/A",
+    "attackInterval": null,
     "damageArea": 9,
     "range": "Melee",
     "speed": 21
